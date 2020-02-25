@@ -16,14 +16,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/**
 Route::get('tareas/{nombre?}', function ($nombre = "User") {
     $nombre = strtoupper($nombre);
     return view('tareas.tareasIndex')->with(['nombre' => $nombre]);
     //return view('tareas/tareasIndex'); Otra opcion es con /
 });
 
-
+ */
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('tarea','TareaController');
