@@ -16,12 +16,18 @@
 
                     <hr>
                     <table class="table">
-                        <tr>ID</tr>
-                        <tr>Tarea</tr>
-                        <tr>Descripcion</tr>
+                        <thead>
+                            <th>ID</th>
+                            <th>Tarea</th>
+                            <th>Descripcion</th>
+                        </thead>
                         @foreach ($tareas as $tarea)
                         <tr>
-                            <td>{{$tarea->id}}</td>
+                            <td>
+                                <a href="{{route('tarea.show',$tarea->id)}}">
+                                    {{$tarea->id}}
+                                </a>
+                            </td>
                             <td>{{$tarea->nombre_tarea}}</td>
                             <td>{{$tarea->descripcion}}</td>
                         </tr>
