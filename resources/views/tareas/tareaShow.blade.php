@@ -9,6 +9,15 @@
                 Editar
             </a>
             <br>
+            <br>
+            <form action="{{route('tarea.destroy',$tarea->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-primary"> Eliminar</button>
+                
+            </form>
+           
+            <br>
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <th>ID</th>
