@@ -57,7 +57,9 @@
         </div>
         <div class="form-group">
             <label for="selectPriori">Prioridad</label>
-            {!! Form::select('prioridad', ['1' => '1','2' => '2','3' => '3'],null,['class' => 'form-control']) !!}
+            {!!
+             Form::select('prioridad', ['1' => '1','2' => '2','3' => '3'],null,['class' => 'form-control']) 
+             !!}
             {{-- 
                 <select class="form-control" id="selectPriori" name="prioridad">
                     <option value="1" {{isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>1</option>
@@ -67,6 +69,13 @@
             <option value="5" {{isset($tarea) && $tarea->prioridad == 5 ? 'selected' : ''}}>5</option>
             </select>
             --}}
+        </div>
+        <div class="form-group">
+            <label>Categoria</label>
+            {!!
+             Form::select('categoria_id',$categorias,null,['class' => 'form-control']) 
+             !!}
+           
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="terminada"

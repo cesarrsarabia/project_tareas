@@ -35,10 +35,17 @@
                     </td>
                     <td>{{$tarea->nombre_tarea}}</td>
                     <td>{{$tarea->descripcion}}</td>
-                    <td>{{$tarea->fecha_inicio}}</td>
-                    <td>{{$tarea->fecha_termino}}</td>
+                    <td>{{$tarea->fecha_inicio->format('d/m/Y')}}</td>
+                    <td>{{$tarea->fecha_termino->format('d/m/Y')}}</td>
                     <td>{{$tarea->prioridad}}</td>
                     <td>{{$tarea->estatus}}</td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        Usuario: {{ $tarea->user->name}}
+                        <br>
+                        Categoria : {{$tarea->categoria->nombre_categoria}}
+                    </td>
                 </tr>
 
             </table>
