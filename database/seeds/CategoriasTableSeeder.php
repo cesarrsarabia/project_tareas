@@ -22,7 +22,8 @@ class CategoriasTableSeeder extends Seeder
         ]);
         /*
         Categoria::create([
-            'nombre_categoria' => 'Personal'
+            'nombre_categoria' => 'Trabajo'
         ]);*/
+        
     }
 }

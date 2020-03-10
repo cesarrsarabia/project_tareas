@@ -9,7 +9,7 @@
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -40,14 +40,22 @@
         </div>
         <div class="form-group">
             <label for="inputFecha">Fecha Inicio</label>
-            <input type="date" class="form-control" id="inputFecha" name="fecha_inicio"
-                value="{{$tarea->fecha_inicio ?? ''}}">
+            {!! Form::text('fecha_inicio',isset($tarea) ? $tarea->fecha_inicio->toDateString(): null,
+            ['class' => 'form-control','id'=>'inputFecha']); !!}
+            {{-- <input type="date" class="form-control" id="inputFecha" name="fecha_inicio"
+                value="{{$tarea->fecha_inicio ?? '' : }}">
+            --}}
         </div>
 
         <div class="form-group">
             <label for="inputFechaTermin">Fecha Termino</label>
+            {!! Form::text('fecha_termino',isset($tarea) ? $tarea->fecha_termino->toDateString(): null,
+            ['class' => 'form-control','id'=>'inputFechaTermin']);
+            !!}
+            {{--
             <input type="date" class="form-control" id="inputFechaTermin" name="fecha_termino"
                 value="{{$tarea->fecha_termino ?? ''}}">
+            --}}
         </div>
 
         <div class="form-group">
@@ -58,8 +66,8 @@
         <div class="form-group">
             <label for="selectPriori">Prioridad</label>
             {!!
-             Form::select('prioridad', ['1' => '1','2' => '2','3' => '3'],null,['class' => 'form-control']) 
-             !!}
+            Form::select('prioridad', ['1' => '1','2' => '2','3' => '3'],null,['class' => 'form-control'])
+            !!}
             {{-- 
                 <select class="form-control" id="selectPriori" name="prioridad">
                     <option value="1" {{isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>1</option>
@@ -73,9 +81,9 @@
         <div class="form-group">
             <label>Categoria</label>
             {!!
-             Form::select('categoria_id',$categorias,null,['class' => 'form-control']) 
-             !!}
-           
+            Form::select('categoria_id',$categorias,null,['class' => 'form-control'])
+            !!}
+
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="terminada"

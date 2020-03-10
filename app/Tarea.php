@@ -7,7 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Tarea extends Model
 {
     //
-    protected $dates = ['fecha_inicio','fecha_termino','created_at','updated_at'];
+    // Asignacion masiva de datos
+    //Dentro del arreglo , el nombre de las columnas que se reciben
+    protected $fillable = [
+        'categoria_id',
+        'user_id',
+        'nombre_tarea',
+        'descripcion',
+        'prioridad',
+        'fecha_inicio',
+        'fecha_termino'
+    ];
+
+    protected $dates = ['fecha_inicio', 'fecha_termino', 'created_at', 'updated_at'];
     public function user()
     {
         return $this->belongsTo(User::class);

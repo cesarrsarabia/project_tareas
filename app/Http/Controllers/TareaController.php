@@ -19,7 +19,7 @@ class TareaController extends Controller
         //
         $tareas = Tarea::all();
         //dd($tareas);
-        return view('tareas.tareasIndex',compact('tareas'));
+        return view('tareas.tareasIndex', compact('tareas'));
     }
 
     /**
@@ -29,9 +29,9 @@ class TareaController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all()->pluck('nombre_categoria','id');
+        $categorias = Categoria::all()->pluck('nombre_categoria', 'id');
         //dd($categorias->pluck('nombre_categoria'.'id'));
-        return view('tareas.tareasForm',compact('categorias'));
+        return view('tareas.tareasForm', compact('categorias'));
         //
     }
 
@@ -51,7 +51,7 @@ class TareaController extends Controller
             'descripcion' => 'required|min:5',
             'prioridad' => 'required|int|min:1|max:5',
         ]);
-
+        /*
         $tarea = new Tarea();
         $tarea->user_id = \Auth::id();
         $tarea->categoria_id = $request->categoria_id;
@@ -61,7 +61,12 @@ class TareaController extends Controller
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
         $tarea->save();
+        */
+
+        //agrega el id del usuario Loggeado
+        $request->merge(['user_id' => \Auth::id()]);
         
+        Tarea::create($request->all());
         //
         //dd($request->all());
         //dd($request->nombre_tarea); Recupera nombres o variables en especifico
@@ -77,7 +82,7 @@ class TareaController extends Controller
     public function show(Tarea $tarea)
     {
         //
-        return view('tareas.tareaShow',compact('tarea'));
+        return view('tareas.tareaShow', compact('tarea'));
     }
 
     /**
@@ -89,8 +94,8 @@ class TareaController extends Controller
     public function edit(Tarea $tarea)
     {
         //
-        $categorias = Categoria::all()->pluck('nombre_categoria','id');
-        return view('tareas.tareasForm',compact('tarea','categorias'));
+        $categorias = Categoria::all()->pluck('nombre_categoria', 'id');
+        return view('tareas.tareasForm', compact('tarea', 'categorias'));
     }
 
     /**
@@ -109,10 +114,13 @@ class TareaController extends Controller
             'nombre_tarea' => 'required|max:255',
             'fecha_inicio' => 'required|date', // Valida el tipo de dato sea fecha
             'fecha_termino' => 'required',
-            'descripcion' => 'required|min:20',
+            'descripcion' => 'required|min:2',
             'prioridad' => 'required|int|min:1|max:5',
         ]);
 
+
+        Tarea::where('id',$tarea->id)->update($request->except('_token','_method'));
+        /*
         $tarea->nombre_tarea = $request->nombre_tarea;
         $tarea->categoria_id = $request->categoria_id;
         $tarea->fecha_inicio = $request->fecha_inicio;
@@ -120,11 +128,11 @@ class TareaController extends Controller
         $tarea->descripcion = $request->descripcion;
         $tarea->prioridad = $request->prioridad;
         $tarea->save();
-        
+        */
         //
         //dd($request->all());
         //dd($request->nombre_tarea); Recupera nombres o variables en especifico
-        return redirect()->route('tarea.show',$tarea->id);
+        return redirect()->route('tarea.show', $tarea->id);
     }
 
     /**
