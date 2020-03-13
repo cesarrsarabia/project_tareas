@@ -45,7 +45,8 @@
             <label for="inputNombre">Integrantes</label>
 
             {!!
-            Form::select('user_id[]',$users,null,['class' => 'form-control','multiple'])
+            Form::select('user_id[]',$users,isset($equipo) ? $equipo->users()->pluck('id'): null,
+            ['class' => 'form-control','multiple'])
             !!}
             {{-- <input type="text" class="form-control" id="inputNombre" name="nombre_equipo"
                 value="{{$equipo->nombre_equipo ?? ''}}">
