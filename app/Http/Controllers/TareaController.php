@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Equipo;
 use App\Tarea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +31,9 @@ class TareaController extends Controller
     public function create()
     {
         $categorias = Categoria::all()->pluck('nombre_categoria', 'id');
+        $equipos = Equipo::all()->pluck('nombre_equipo', 'id')->toArray();
         //dd($categorias->pluck('nombre_categoria'.'id'));
-        return view('tareas.tareasForm', compact('categorias'));
+        return view('tareas.tareasForm', compact('categorias','equipos'));
         //
     }
 
@@ -65,7 +67,11 @@ class TareaController extends Controller
 
         //agrega el id del usuario Loggeado
         $request->merge(['user_id' => \Auth::id()]);
-        
+
+        if($request->equipo_id == 0 ){
+            $request->merge(['equipo_id' => null]);
+       }
+       
         Tarea::create($request->all());
         //
         //dd($request->all());
@@ -95,7 +101,8 @@ class TareaController extends Controller
     {
         //
         $categorias = Categoria::all()->pluck('nombre_categoria', 'id');
-        return view('tareas.tareasForm', compact('tarea', 'categorias'));
+        $equipos = Equipo::all()->pluck('nombre_equipo', 'id')->toArray();
+        return view('tareas.tareasForm', compact('tarea', 'categorias','equipos'));
     }
 
     /**
@@ -117,8 +124,9 @@ class TareaController extends Controller
             'descripcion' => 'required|min:2',
             'prioridad' => 'required|int|min:1|max:5',
         ]);
-
-
+        if($request->equipo_id == 0 ){
+             $request->merge(['equipo_id' => null]);
+        }
         Tarea::where('id',$tarea->id)->update($request->except('_token','_method'));
         /*
         $tarea->nombre_tarea = $request->nombre_tarea;

@@ -85,6 +85,14 @@
             !!}
 
         </div>
+
+        <div class="form-group">
+            <label>Equipo</label>
+            {!!
+            Form::select('equipo_id',['0' => 'Personal (Sin Equipo)'] + $equipos,null,['class' => 'form-control'])
+            !!}
+
+        </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="terminada"
                 {{isset($tarea) && $tarea->terminada == 1 ? 'checked' : ''}}>

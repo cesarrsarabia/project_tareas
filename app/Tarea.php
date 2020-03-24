@@ -16,7 +16,8 @@ class Tarea extends Model
         'descripcion',
         'prioridad',
         'fecha_inicio',
-        'fecha_termino'
+        'fecha_termino',
+        'equipo_id'
     ];
 
     protected $dates = ['fecha_inicio', 'fecha_termino', 'created_at', 'updated_at'];
@@ -28,5 +29,10 @@ class Tarea extends Model
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function equipo()
+    {
+        return $this->belongsTo(Equipo::class);
     }
 }

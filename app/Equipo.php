@@ -12,4 +12,10 @@ class Equipo extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function tareas(){
+        return $this->hasMany(Tarea::class);
+    }
+
+    
 }
