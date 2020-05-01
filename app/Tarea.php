@@ -35,4 +35,9 @@ class Tarea extends Model
     {
         return $this->belongsTo(Equipo::class);
     }
+
+    public function archivos()
+    {
+        return $this->morphMany(Archivo::class);
+    }
 }

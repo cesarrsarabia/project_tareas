@@ -45,4 +45,9 @@ class User extends Authenticatable
     public function equipos(){
         return $this->belongsToMany(Equipo::class);
     }
+
+    public function archivos()
+    {
+        return $this->morphMany(Archivo::class);
+    }
 }

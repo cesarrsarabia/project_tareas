@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+    <div class="row">
+        <div class="col-md-8">
 
             <a href="{{route('tarea.edit',$tarea->id)}}" class="btn btn-warning btn-primary">
                 Editar
@@ -47,6 +47,34 @@
                         Categoria : {{$tarea->categoria->nombre_categoria}}
                     </td>
                 </tr>
+
+            </table>
+
+        </div>
+
+        <div class="col-md-4">
+
+    
+           
+            <br>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <th>ID</th>
+                    <th>Archivo</th>
+                    <th>Acciones</th>                    
+                </thead>
+
+                @foreach ($tara->archivos as $archivo)
+                <tr>
+                    <td>
+                        {{$archivo->id}}
+                    </td>
+                    <td>{{$archivo->nombre_original}}</td>
+                   <td></td>
+                </tr>
+                @endforeach
+                
+                
 
             </table>
 
