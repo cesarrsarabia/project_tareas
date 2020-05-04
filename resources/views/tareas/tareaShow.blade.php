@@ -10,13 +10,18 @@
             </a>
             <br>
             <br>
-            <form action="{{route('tarea.destroy',$tarea->id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-primary"> Eliminar</button>
+           {{--  @if (\Gate::allows('administrador'))--}}
                 
-            </form>
+            @can('propietario', $tarea)
+                <form action="{{route('tarea.destroy',$tarea->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-primary"> Eliminar</button>
+                    
+                </form>
+            @endcan
            
+           {{-- @endif --}}
             <br>
             <table class="table table-bordered">
                 <thead class="thead-dark">
@@ -55,7 +60,7 @@
         <div class="col-md-4">
 
     
-           
+           {{-- 
             <br>
             <table class="table table-bordered">
                 <thead class="thead-dark">
@@ -64,7 +69,7 @@
                     <th>Acciones</th>                    
                 </thead>
 
-                @foreach ($tara->archivos as $archivo)
+                @foreach ($tarea->archivos as $archivo)
                 <tr>
                     <td>
                         {{$archivo->id}}
@@ -77,7 +82,7 @@
                 
 
             </table>
-
+--}}
         </div>
     </div>
 </div>
